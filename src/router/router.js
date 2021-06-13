@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import { publicPath } from '../../vue.config'
 import Router from 'vue-router'
 import Login from '../components/user/pages/Login.vue'
 import Register from '../components/user/pages/Register.vue'
@@ -267,6 +268,7 @@ const routes = [
 ]
 
 const router = new Router({
+  base: publicPath,
   mode: 'history',
   routes
 })
