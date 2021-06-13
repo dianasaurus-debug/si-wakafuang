@@ -5,17 +5,20 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "deploy": "node scripts/gh-pages-deploy.js"
   },
   "dependencies": {
     "@appbaseio/reactivesearch-vue": "^1.0.0-beta.3",
     "@fortawesome/fontawesome-free": "^5.15.2",
+    "admin-lte": "^3.1.0",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "bootstrap-vue": "^2.21.2",
     "chokidar": "^3.5.1",
     "core-js": "^3.6.5",
     "cropperjs": "^1.5.11",
+    "execa": "^5.1.1",
     "file-saver": "^2.0.5",
     "jquery": "^3.5.1",
     "jsdom": "^16.4.0",
@@ -27,6 +30,7 @@
     "sweetalert2": "^10.15.5",
     "underscore": "^1.12.1",
     "v-money": "^0.8.1",
+    "viewerjs": "^1.10.0",
     "vue": "^2.6.11",
     "vue-advanced-cropper": "^1.6.0",
     "vue-chartjs": "^3.5.1",
