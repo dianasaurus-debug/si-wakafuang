@@ -66,8 +66,7 @@ const routes = [
       isAdmin: false
     },
     name: 'landing-page',
-    component: LandingPage
-
+    component: LandingPage,
   },
   {
     path: '/about-us',
@@ -269,7 +268,7 @@ const routes = [
 
 const router = new Router({
   base: publicPath,
-  mode: 'history',
+  mode : 'hash',
   routes
 })
 
