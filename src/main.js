@@ -4,7 +4,6 @@ import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import '@fortawesome/fontawesome-free/js/all.js'
-import '../src/assets/css/bootstrap-social.css'
 import 'viewerjs/dist/viewer.css';
 import Vuelidate from 'vuelidate';
 import store from './store';
@@ -23,7 +22,6 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import money from 'v-money';
 import titleMixin from './utils/titleMixins'
 import VueRs from "@appbaseio/reactivesearch-vue";
-import vuetify from './plugins/vuetify'
 
 // register directive v-money and component <money>
 // import 'vuetify/dist/vuetify.min.css'
@@ -73,7 +71,6 @@ Vue.filter("filterMoney", function (value) {
 
 new Vue({
   router,
-  vuetify,
   store,
   render: h => h(App)
 }).$mount('#app')

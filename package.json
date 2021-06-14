@@ -42,7 +42,6 @@
     "vue-router": "^3.5.1",
     "vue-truncate": "^1.0.0",
     "vuelidate": "^0.7.6",
-    "vuetify": "^2.4.6",
     "vuex": "^3.6.2",
     "vuex-persistedstate": "^4.0.0-beta.3",
     "xmlhttprequest": "^1.8.0"
