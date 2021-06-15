@@ -386,6 +386,7 @@
           metode_pembayaran: '',
           dirisendiri: true,
           katakunci : '',
+          selectedProgram: {},
           pembayaranAbadi: {
             nominal: '',
             atas_nama: '',
