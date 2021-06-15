@@ -101,25 +101,30 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="w in latestwakafdata.slice(0, 5)" v-bind:key="w.id">
-                      <td>{{w.program_wakaf.judul}}</td>
-                      <td>{{w.tanggal}}</td>
-                      <td>{{w.nominal | filterMoney}}</td>
-                      <td>
-                        <span v-if="w.status_pembayaran=='success'" class="badge bg-green">Sukses</span>
-                        <span v-if="w.status_pembayaran=='failure'" class="badge bg-red">Gagal</span>
-                        <span v-if="w.status_pembayaran=='pending'" class="badge bg-secondary">Pending</span>
-                        <span v-if="w.status_pembayaran=='refund'" class="badge bg-info">Refund</span>
-                      </td>
-                      <td>
-                        <img src="@/assets/images/logo_bank_bca.png" height="20px" v-if="w.metode_pembayaran=='bca'">
-                        <img src="@/assets/images/logo-bni.png" height="20px" v-else-if="w.metode_pembayaran=='bni'">
-                        <img src="@/assets/images/logo-bri.png" height="20px" v-else-if="w.metode_pembayaran=='bri'">
-                        <img src="@/assets/images/qris.png" height="20px" v-else-if="w.metode_pembayaran=='gopay'">
-                        <img src="@/assets/images/indomaret.png" height="20px" v-else-if="w.metode_pembayaran=='indomaret'">
-                        <img src="@/assets/images/alfamart.png" height="20px" v-else-if="w.metode_pembayaran=='alfamart'">
-                      </td>
-                    </tr>
+                    <div v-if="latestwakafdata.length>0">
+                      <tr v-for="w in latestwakafdata.slice(0, 5)" v-bind:key="w.id">
+                        <td>{{w.program_wakaf.judul}}</td>
+                        <td>{{w.tanggal}}</td>
+                        <td>{{w.nominal | filterMoney}}</td>
+                        <td>
+                          <span v-if="w.status_pembayaran=='success'" class="badge bg-green">Sukses</span>
+                          <span v-if="w.status_pembayaran=='failure'" class="badge bg-red">Gagal</span>
+                          <span v-if="w.status_pembayaran=='pending'" class="badge bg-secondary">Pending</span>
+                          <span v-if="w.status_pembayaran=='refund'" class="badge bg-info">Refund</span>
+                        </td>
+                        <td>
+                          <img src="@/assets/images/logo_bank_bca.png" height="20px" v-if="w.metode_pembayaran=='bca'">
+                          <img src="@/assets/images/logo-bni.png" height="20px" v-else-if="w.metode_pembayaran=='bni'">
+                          <img src="@/assets/images/logo-bri.png" height="20px" v-else-if="w.metode_pembayaran=='bri'">
+                          <img src="@/assets/images/qris.png" height="20px" v-else-if="w.metode_pembayaran=='gopay'">
+                          <img src="@/assets/images/indomaret.png" height="20px" v-else-if="w.metode_pembayaran=='indomaret'">
+                          <img src="@/assets/images/alfamart.png" height="20px" v-else-if="w.metode_pembayaran=='alfamart'">
+                        </td>
+                      </tr>
+                    </div>
+                    <div v-else>
+                      <h5>Data Wakaf Kosong</h5>
+                    </div>
                     </tbody>
                   </table>
                 </div>
