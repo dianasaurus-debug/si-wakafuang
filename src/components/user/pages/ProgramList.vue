@@ -69,16 +69,13 @@
               <br>
               <!--Title-->
               <h4 class="card-title mb-2" style="font-size: 20px;font-weight: bold">{{ program.judul }}</h4>
-              <h6 class="card-text text-justify text-white-50 mt-2 mb-2">
-                <span class="font-weight-bold text-white">Wakaf Abadi Terkumpul </span> : {{ program.wakaf_abadi_terkumpul | filterMoney }} <br>
-                <span class="font-weight-bold text-white">Wakaf Berjangka Terkumpul </span> : {{ program.wakaf_berjangka_terkumpul | filterMoney }}
-              </h6>
+              <!--Text-->
               <p class="card-text text-justify" style="font-size: 12px;">
                 {{ program.deskripsi | truncate(150, '...') }}
               </p>
-              <h6 class="card-text text-justify text-blue">
-                <span class="font-weight-bold text-black-50">Terkumpul</span> :
-                {{ program.wakaf_abadi_terkumpul + program.wakaf_berjangka_terkumpul | filterMoney }}
+              <h6 class="card-text text-justify text-white-50 mt-2 mb-2">
+                <span class="font-weight-bold text-white">Wakaf Abadi Terkumpul </span> : {{ program.wakaf_abadi_terkumpul | filterMoney }} <br>
+                <span class="font-weight-bold text-white">Wakaf Berjangka Terkumpul </span> : {{ program.wakaf_berjangka_terkumpul | filterMoney }}
               </h6>
               <a href="" class="btn btn-primary mt-2 mr-1" @click.prevent="berwakaf(program)">Berwakaf</a>
               <a href="" class="btn btn-success mt-2" @click.prevent="navigateToDetail(program)">More</a>
