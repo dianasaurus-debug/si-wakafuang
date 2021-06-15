@@ -89,7 +89,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0">
-                <div class="table-responsive">
+                <div class="table-responsive" v-if="latestwakafdata.length>0">
                   <table class="table m-0">
                     <thead>
                     <tr>
@@ -101,7 +101,6 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <div v-if="latestwakafdata.length>0">
                       <tr v-for="w in latestwakafdata.slice(0, 5)" v-bind:key="w.id">
                         <td>{{w.program_wakaf.judul}}</td>
                         <td>{{w.tanggal}}</td>
@@ -121,12 +120,11 @@
                           <img src="@/assets/images/alfamart.png" height="20px" v-else-if="w.metode_pembayaran=='alfamart'">
                         </td>
                       </tr>
-                    </div>
-                    <div v-else>
-                      <h5 class="text-muted text-center">Data Wakaf Kosong</h5>
-                    </div>
                     </tbody>
                   </table>
+                </div>
+                <div v-else>
+                  <h5 class="text-muted text-center">Data Wakaf Kosong</h5>
                 </div>
                 <!-- /.table-responsive -->
               </div>
