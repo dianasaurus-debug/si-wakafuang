@@ -16,7 +16,7 @@
               <p>Dashboard</p>
             </router-link>
           </li>
-          <li class="nav-item">
+          <li class="nav-item open">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-cog green"></i>
               <p>
