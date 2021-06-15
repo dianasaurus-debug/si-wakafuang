@@ -1,13 +1,13 @@
 <template>
   <div>
-  <div class="container">
-    <div class="row mt-3">
-      <div class="col-12">
-        <!-- Main jumbotron for a primary marketing message or call to action -->
-        <div class="jumbotron bg-overlay"  :style=bgStyle>
-          <div class="container">
-            <!--Card content-->
-            <div class="mb-3">
+    <div class="container">
+      <div class="row mt-3">
+        <div class="col-12">
+          <!-- Main jumbotron for a primary marketing message or call to action -->
+          <div class="jumbotron bg-overlay"  :style=bgStyle>
+            <div class="container">
+              <!--Card content-->
+              <div class="mb-3">
             <span class="badge badge-pill badge-success mr-2">
               <i class="fas fa-graduation-cap" v-show="currentProgram.kategori_id == 1"></i>
               <i class="fas fa-heartbeat" v-show="currentProgram.kategori_id == 2"></i>
@@ -16,81 +16,82 @@
               <i class="fas fa-atlas" v-show="currentProgram.kategori_id == 5"></i>
               {{ currentProgram.kategori.nama }}
             </span>
-<!--              <span v-if="formatDate(currentProgram.createdAt)<=formatDate(currentProgram.deadline)" class="badge badge-pill badge-primary">Ongoing</span>-->
-<!--              <span v-if="formatDate(currentProgram.createdAt)>formatDate(currentProgram.deadline)" class="badge badge-pill badge-success">Selesai</span>-->
+                <!--              <span v-if="formatDate(currentProgram.createdAt)<=formatDate(currentProgram.deadline)" class="badge badge-pill badge-primary">Ongoing</span>-->
+                <!--              <span v-if="formatDate(currentProgram.createdAt)>formatDate(currentProgram.deadline)" class="badge badge-pill badge-success">Selesai</span>-->
+              </div>
+              <h2>{{ currentProgram.judul }}</h2>
+              <h6 class="card-text text-justify text-white-50 mt-2 mb-2">
+                <span class="font-weight-bold text-white">Wakaf Abadi Terkumpul </span> : {{ currentProgram.wakaf_abadi_terkumpul | filterMoney }} <br>
+                <span class="font-weight-bold text-white">Wakaf Berjangka Terkumpul </span> : {{ currentProgram.wakaf_berjangka_terkumpul | filterMoney }}
+              </h6>
+              <!--            <div style="max-width: 1000px">-->
+              <!--              <div class="progress" style="height:20px;">-->
+              <!--                <div class="progress-bar" role="progressbar"-->
+              <!--                     :style="progressStyle(currentProgram.terkumpul,currentProgram.target)">-->
+              <!--                  {{ currentProgram.terkumpul | filterMoney }}-->
+              <!--                </div>-->
+              <!--              </div>-->
+              <!--              <h6 class="float-right">Dari  <b>{{ currentProgram.target | filterMoney }}</b></h6>-->
+              <!--            </div>-->
+              <!--            <p class="text-left mt-5"><span class="mr-2"><i class="fa fa-calendar"></i></span>{{formatDate(currentProgram.created_at)}} - {{formatDate(currentProgram.deadline)}}</p>-->
+              <!--            <p class="text-left"><span class="mr-2"><i class="fa fa-sitemap"></i></span>{{ currentProgram.alamat}}</p>-->
+              <p><a class="btn btn-primary btn-lg mt-2" href="#" role="button" @click="berwakaf(currentProgram)">Berwakaf</a></p>
             </div>
-            <h2>{{ currentProgram.judul }}</h2>
-            <h6 class="card-text text-justify text-white-50 mt-2 mb-2">
-              <span class="font-weight-bold text-white">Wakaf Abadi Terkumpul </span> : {{ currentProgram.wakaf_abadi_terkumpul | filterMoney }} <br>
-              <span class="font-weight-bold text-white">Wakaf Berjangka Terkumpul </span> : {{ currentProgram.wakaf_berjangka_terkumpul | filterMoney }}
-            </h6>
-<!--            <div style="max-width: 1000px">-->
-<!--              <div class="progress" style="height:20px;">-->
-<!--                <div class="progress-bar" role="progressbar"-->
-<!--                     :style="progressStyle(currentProgram.terkumpul,currentProgram.target)">-->
-<!--                  {{ currentProgram.terkumpul | filterMoney }}-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <h6 class="float-right">Dari  <b>{{ currentProgram.target | filterMoney }}</b></h6>-->
-<!--            </div>-->
-<!--            <p class="text-left mt-5"><span class="mr-2"><i class="fa fa-calendar"></i></span>{{formatDate(currentProgram.created_at)}} - {{formatDate(currentProgram.deadline)}}</p>-->
-<!--            <p class="text-left"><span class="mr-2"><i class="fa fa-sitemap"></i></span>{{ currentProgram.alamat}}</p>-->
-            <p><a class="btn btn-primary btn-lg mt-2" href="#" role="button" @click="berwakaf(currentProgram)">Berwakaf</a></p>
           </div>
-        </div>
 
-    </div>
-  </div>
-    <div class="row">
-      <div class="col-12">
-        <section id="tabs" class="project-tab">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12">
-                <nav>
-                  <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link active" id="nav-deskripsi-tab" data-toggle="tab" href="#nav-deskripsi" role="tab"
-                       aria-controls="nav-deskripsi" aria-selected="true">Deskripsi</a>
-<!--                    <a class="nav-item nav-link" id="nav-wakaf-tab" data-toggle="tab" href="#nav-wakaf" role="tab"-->
-<!--                       aria-controls="nav-wakaf" aria-selected="false">Daftar Wakaf</a>-->
-                    <a class="nav-item nav-link" id="nav-laporan-tab" data-toggle="tab" href="#nav-laporan" role="tab"
-                       aria-controls="nav-laporan" aria-selected="false">Laporan</a>
-                  </div>
-                </nav>
-                <div class="tab-content" id="nav-tabContent">
-                  <div class="tab-pane fade show active" id="nav-deskripsi" role="tabpanel" aria-labelledby="nav-deskripsi-tab">
-                    <p class="text-left mt-2" >
-                      {{currentProgram.deskripsi}}
-                    </p>
-                  </div>
-                  <div class="tab-pane fade" id="nav-laporan" role="tabpanel" aria-labelledby="nav-laporan-tab">
-                    <div class="container mt-3">
-                      <div class="row">
-                        <div class="col-12">
-                          <section class="content">
-                            <div class="container-fluid">
-                              <!-- Timelime example  -->
-                              <div class="row">
-                                <div class="col-md-12">
-                                  <!-- The time line -->
-                                  <div class="timeline" v-for="laporan in laporannew" v-bind:key="laporan.id">
-                                    <!-- timeline time label -->
-                                    <div class="time-label">
-                                      <span class="bg-red">{{formatDate(laporan.createdAt)}}</span>
-                                    </div>
-                                    <!-- /.timeline-label -->
-                                    <!-- timeline item -->
-                                    <div>
-                                      <div class="timeline-item">
-                                        <div class="timeline-body">
-                                          <div class="container">
-                                            <div class="row">
-                                              <div class="col-4">
-                                                <img class="img-thumbnail" :src="'https://wakaf.praditya.web.id/images/'+laporan.gambar"
-                                                     alt="Card image cap">
-                                              </div>
-                                              <div class="col-8">
-                                                {{laporan.deskripsi}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <section id="tabs" class="project-tab">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12">
+                  <nav>
+                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                      <a class="nav-item nav-link active" id="nav-deskripsi-tab" data-toggle="tab" href="#nav-deskripsi" role="tab"
+                         aria-controls="nav-deskripsi" aria-selected="true">Deskripsi</a>
+                      <!--                    <a class="nav-item nav-link" id="nav-wakaf-tab" data-toggle="tab" href="#nav-wakaf" role="tab"-->
+                      <!--                       aria-controls="nav-wakaf" aria-selected="false">Daftar Wakaf</a>-->
+                      <a class="nav-item nav-link" id="nav-laporan-tab" data-toggle="tab" href="#nav-laporan" role="tab"
+                         aria-controls="nav-laporan" aria-selected="false">Laporan</a>
+                    </div>
+                  </nav>
+                  <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-deskripsi" role="tabpanel" aria-labelledby="nav-deskripsi-tab">
+                      <p class="text-left mt-2" >
+                        {{currentProgram.deskripsi}}
+                      </p>
+                    </div>
+                    <div class="tab-pane fade" id="nav-laporan" role="tabpanel" aria-labelledby="nav-laporan-tab">
+                      <div class="container mt-3">
+                        <div class="row">
+                          <div class="col-12">
+                            <section class="content">
+                              <div class="container-fluid">
+                                <!-- Timelime example  -->
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <!-- The time line -->
+                                    <div class="timeline" v-for="laporan in laporannew" v-bind:key="laporan.id">
+                                      <!-- timeline time label -->
+                                      <div class="time-label">
+                                        <span class="bg-red">{{formatDate(laporan.createdAt)}}</span>
+                                      </div>
+                                      <!-- /.timeline-label -->
+                                      <!-- timeline item -->
+                                      <div>
+                                        <div class="timeline-item">
+                                          <div class="timeline-body">
+                                            <div class="container">
+                                              <div class="row">
+                                                <div class="col-4">
+                                                  <img class="img-thumbnail" :src="'https://wakaf.praditya.web.id/images/'+laporan.gambar"
+                                                       alt="Card image cap">
+                                                </div>
+                                                <div class="col-8">
+                                                  {{laporan.deskripsi}}
+                                                </div>
                                               </div>
                                             </div>
                                           </div>
@@ -98,13 +99,13 @@
                                       </div>
                                     </div>
                                   </div>
+                                  <!-- /.col -->
                                 </div>
-                                <!-- /.col -->
                               </div>
-                            </div>
-                            <!-- /.timeline -->
+                              <!-- /.timeline -->
 
-                          </section>
+                            </section>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -112,14 +113,13 @@
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
       </div>
+
+
+      <!-- Modal -->
     </div>
-
-
-    <!-- Modal -->
-  </div>
     <!-- Modal -->
     <div class="modal fade" id="berWakaf" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
          aria-labelledby="berWakaf" aria-hidden="true">
@@ -333,325 +333,328 @@
   </div>
 </template>
 <script>
-  import 'viewerjs/dist/viewer.css'
-  import authHeader from '@/services/auth-header'
-  import axios from 'axios'
-  import $ from 'jquery'
-  import moment from "moment";
-  const URL = 'https://wakaf.praditya.web.id'
-  import { required } from 'vuelidate/lib/validators'
-  import swal from 'sweetalert2'
-  import { saveAs } from 'file-saver'
-  export default {
-    validations: {
+import 'viewerjs/dist/viewer.css'
+import authHeader from '@/services/auth-header'
+import axios from 'axios'
+import $ from 'jquery'
+import moment from "moment";
+const URL = 'https://wakaf.praditya.web.id'
+import { required } from 'vuelidate/lib/validators'
+import swal from 'sweetalert2'
+import { saveAs } from 'file-saver'
+export default {
+  validations: {
+    pembayaranAbadi: {
+      nominal: { required },
+      atas_nama: { required }
+    },
+    pembayaranBerjangka: {
+      nominal: { required },
+      atas_nama: { required },
+      jangka_waktu: { required },
+      nama_bank: { required },
+      nomor_rekening: { required },
+      nama_pemilik_rekening: { required }
+    }
+  },
+  title: 'Detail Program Wakaf',
+  created(){
+    this.getLaporan();
+    console.log(this.currentProgram)
+  },
+  data() {
+    return {
+      isAbadi : 1,
+      columns: [
+        {label: 'Nama Wakif', field: 'nama_wakif'},
+        {label: 'Nominal', field: 'nominal'},
+        {
+          label: 'Dibayar Pada', field: 'created_at',
+          type: 'date',
+          dateInputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+          dateOutputFormat: 'dd/MM/yyyy'
+        },
+      ],
+      rows : [],
+      page: 1,
+      per_page: 5,
+      displayNow : 0,
+      laporannew : [],
+      today : moment(),
+      jenisWakafAbadi: true,
+      jenis_pembayaran: '',
+      metode_pembayaran: '',
+      dirisendiri: true,
+      katakunci : '',
+      selectedProgram: {},
       pembayaranAbadi: {
-        nominal: { required },
-        atas_nama: { required }
+        nominal: '',
+        atas_nama: '',
+        UserId: '',
+        ProgramId: ''
       },
       pembayaranBerjangka: {
-        nominal: { required },
-        atas_nama: { required },
-        jangka_waktu: { required },
-        nama_bank: { required },
-        nomor_rekening: { required },
-        nama_pemilik_rekening: { required }
+        nominal: '',
+        atas_nama: '',
+        UserId: '',
+        ProgramId: '',
+        nomor_rekening: '',
+        nama_pemilik_rekening: '',
+        jangka_waktu: '',
+        nama_bank: ''
+      },
+      daftar_bank: ['Bank Mandiri', 'Bank Bukopin', 'Bank Danamon', 'Bank Mega', 'Bank CIMB Niaga', 'Bank BNI', 'Bank Permata', 'Bank BRI',
+        'Bank Sinarmas', 'Bank Jatim', 'Bank Maybank'],
+      submitted: false
+    }
+  },
+
+  computed:{
+    currentUser() {
+      return this.$store.state.auth.user.data;
+    },
+    currentProgram() {
+      return this.$store.state.currentProgram.program;
+    },
+    bgStyle(){
+      let bgImg = 'https://wakaf.praditya.web.id/images/'+this.currentProgram.gambar;
+      return {
+
+        "background": 'linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url('+bgImg+')'
       }
     },
-    title: 'Detail Program Wakaf',
-      created(){
-        this.getLaporan();
-        console.log(this.currentProgram)
-      },
-      data() {
-        return {
-          isAbadi : 1,
-          columns: [
-            {label: 'Nama Wakif', field: 'nama_wakif'},
-            {label: 'Nominal', field: 'nominal'},
-            {
-              label: 'Dibayar Pada', field: 'created_at',
-              type: 'date',
-              dateInputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-              dateOutputFormat: 'dd/MM/yyyy'
-            },
-          ],
-          rows : [],
-          page: 1,
-          per_page: 5,
-          displayNow : 0,
-          laporannew : [],
-          today : moment(),
-          jenisWakafAbadi: true,
-          jenis_pembayaran: '',
-          metode_pembayaran: '',
-          dirisendiri: true,
-          katakunci : '',
-          selectedProgram: {},
-          pembayaranAbadi: {
-            nominal: '',
-            atas_nama: '',
-            UserId: '',
-            ProgramId: ''
-          },
-          pembayaranBerjangka: {
-            nominal: '',
-            atas_nama: '',
-            UserId: '',
-            ProgramId: '',
-            nomor_rekening: '',
-            nama_pemilik_rekening: '',
-            jangka_waktu: '',
-            nama_bank: ''
-          },
-          daftar_bank: ['Bank Mandiri', 'Bank Bukopin', 'Bank Danamon', 'Bank Mega', 'Bank CIMB Niaga', 'Bank BNI', 'Bank Permata', 'Bank BRI',
-            'Bank Sinarmas', 'Bank Jatim', 'Bank Maybank'],
-          submitted: false
-        }
-      },
+    allWakafAbadi(){
+      let all = [];
+      this.currentProgram.wakafabadi.forEach(abadi=> {
+        if(abadi.status_pembayaran=='success')
+          all.push(abadi)
+      })
 
-      computed:{
-        currentProgram() {
-          return this.$store.state.currentProgram.program;
-        },
-        bgStyle(){
-          let bgImg = 'https://wakaf.praditya.web.id/images/'+this.currentProgram.gambar;
-          return {
-
-            "background": 'linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url('+bgImg+')'
-          }
-        },
-        allWakafAbadi(){
-          let all = [];
-          this.currentProgram.wakafabadi.forEach(abadi=> {
-            if(abadi.status_pembayaran=='success')
-              all.push(abadi)
-          })
-
-          return all;
-        },
-        allWakafBerjangka(){
-          let all = [];
-          this.currentProgram.wakafberjangka.forEach(berjangka=> {
-            if(berjangka.status_pembayaran=='success')
-              all.push(berjangka)
-          })
-          return all;
-        }
-      },
-    methods : {
-      getActiveClass(id) {
-        if (id === this.metode_pembayaran) {
-          return 'btn btn-outline-info active'
-        } else {
-          return 'btn btn-outline-info'
-        }
-      },
-      pickPayment(metode, jenis) {
-        this.jenis_pembayaran = jenis
-        this.metode_pembayaran = metode
-      },
-      berwakaf(program) {
-        this.selectedProgram = program
-        $('#berWakaf').modal('show')
-      },
-      berwakafAbadi() {
-        this.submitted = true
-        // const formData = new FormData();
-        // this.$v.$touch();
-        this.pembayaranAbadi.UserId = this.currentUser.data.id
-        this.pembayaranAbadi.ProgramId = this.selectedProgram.id
-        if (this.pembayaranAbadi.atas_nama == '') {
-          this.pembayaranAbadi.atas_nama = this.currentUser.data.nama
-        }
-        // if (!this.$v.$invalid) {
-        console.log(this.pembayaranAbadi)
-        this.$Progress.start()
-        axios.post(URL + '/api/wakaf-abadi/', {
-          nominal: this.pembayaranAbadi.nominal,
-          nama_wakif: this.pembayaranAbadi.atas_nama,
-          metode_pembayaran: this.metode_pembayaran,
-          program_wakaf_id: this.pembayaranAbadi.ProgramId,
-          wakif_id: this.pembayaranAbadi.UserId,
-          jenis_pembayaran: this.jenis_pembayaran
-        }, { headers: authHeader() })
-            .then((res) => {
-                  this.$emit('AfterCreated')
-                  console.log(res)
-                  $('#berWakaf')
-                      .modal('hide')
-                  if (this.jenis_pembayaran === 'qris') {
-                    swal.fire(
-                        {
-                          title: `<strong>Pindai untuk membayar</strong>`,
-                          imageUrl: `${res.data.data.kode_pembayaran}`,
-                          html: `<p><br><button class="download btn btn-success">Download QR Code</button><br>Atas Nama : ${this.currentUser.data.nama}
-                       <br>Nominal : ${res.data.data.nominal}<br>Status Pembayaran : ${res.data.data.status_pembayaran}<br>
-                       Metode Pembayaran : ${res.data.data.metode_pembayaran}
-                       </p>`,
-                          showCloseButton: true,
-                          willOpen: () => {
-                            const download = document.querySelector('.download')
-
-                            download.addEventListener('click', () => {
-                              saveAs(`${res.data.data.kode_pembayaran}`, 'QR.jpg')
-                            })
-                          }
-                        }
-                    )
-                  } else if (this.jenis_pembayaran === 'bank') {
-                    swal.fire(
-                        {
-                          title: `<strong>Transaksi Berhasil</strong>`,
-                          html: `<p>Atas Nama : ${this.currentUser.data.nama}
-                       <br>Nominal : ${res.data.data.nominal}<br>Status Pembayaran : ${res.data.data.status_pembayaran}<br>
-                       Metode Pembayaran : ${res.data.data.metode_pembayaran}<br> Virtual Account : ${res.data.data.kode_pembayaran}
-                       </p>`,
-                          showCloseButton: true
-                        }
-                    )
-                  } else if (this.jenis_pembayaran === 'cstore') {
-                    swal.fire(
-                        {
-                          title: `<strong>Cstore Payment</strong>`,
-                          html: `<p>Atas Nama : ${this.currentUser.data.nama}
-                       <br>Nominal : ${res.data.data.nominal}<br>Status Pembayaran : ${res.data.data.status_pembayaran}<br>
-                       Metode Pembayaran : ${res.data.data.metode_pembayaran}<br> Kode Pembayaran : ${res.data.data.kode_pembayaran}
-                       </p>`,
-                          showCloseButton: true
-                        }
-                    )
-                  }
-
-                  this.$emit('AfterCreated')
-                  this.$Progress.finish()
-                  this.$router.push('/home/wakaf/abadi')
-                }
-            )
-            .catch(err => {
-              console.log(err)
-              swal.fire(
-                  'Gagal!',
-                  'Pastikan anda mengisikan data dengan benar',
-                  'error'
-              )
-              this.$Progress.fail()
-            })
-        // }
-      },
-      berWakafBerjangka() {
-        this.submitted = true
-        // const formData = new FormData();
-        // this.$v.$touch();
-        this.pembayaranBerjangka.UserId = this.currentUser.data.id
-        this.pembayaranBerjangka.ProgramId = this.selectedProgram.id
-        if (this.pembayaranBerjangka.atas_nama == '') {
-          this.pembayaranBerjangka.atas_nama = this.currentUser.data.nama
-        }
-        // if (!this.$v.$invalid) {
-        this.$Progress.start()
-        axios.post(URL + '/api/wakaf-berjangka/', {
-          nominal: this.pembayaranBerjangka.nominal,
-          nama_wakif: this.pembayaranBerjangka.atas_nama,
-          metode_pembayaran: this.metode_pembayaran,
-          program_wakaf_id: this.pembayaranBerjangka.ProgramId,
-          wakif_id: this.pembayaranBerjangka.UserId,
-          nomor_rekening: this.pembayaranBerjangka.nomor_rekening,
-          nama_pemilik_rekening: this.pembayaranBerjangka.nama_pemilik_rekening,
-          jangka_waktu: this.pembayaranBerjangka.jangka_waktu,
-          nama_bank: this.pembayaranBerjangka.nama_bank,
-          jenis_pembayaran: this.jenis_pembayaran
-        }, {
-          headers: authHeader(),
-          data_wakif: this.currentUser.data
-        })
-            .then((res) => {
-                  console.log(res)
-                  this.$emit('AfterCreated')
-                  $('#berWakaf')
-                      .modal('hide')
-                  if (this.jenis_pembayaran === 'qris') {
-                    swal.fire(
-                        {
-                          title: `<strong>Pindai untuk membayar</strong>`,
-                          imageUrl: `${res.data.data.kode_pembayaran}`,
-                          html: `<p><br><button class="download btn btn-success">Download QR Code</button><br>Atas Nama : ${this.currentUser.data.nama}
-                       <br>Nominal : ${res.data.data.nominal}<br>Status Pembayaran : ${res.data.data.status_pembayaran}<br>
-                       Metode Pembayaran : ${res.data.data.metode_pembayaran}
-                       </p>`,
-                          showCloseButton: true,
-                          willOpen: () => {
-                            const download = document.querySelector('.download')
-
-                            download.addEventListener('click', () => {
-                              console.log('disinii')
-                              saveAs(`${res.data.data.kode_pembayaran}`, 'QR.jpg')
-                            })
-                          }
-                        }
-                    )
-                  } else if (this.jenis_pembayaran === 'bank') {
-                    swal.fire(
-                        {
-                          title: `<strong>Transaksi Berhasil</strong>`,
-                          html: `<p>Atas Nama : ${this.currentUser.data.nama}
-                       <br>Nominal : ${res.data.data.nominal}<br>Status Pembayaran : ${res.data.data.status_pembayaran}<br>
-                       Metode Pembayaran : ${res.data.data.metode_pembayaran}<br> Virtual Account : ${res.data.data.kode_pembayaran}
-                       </p>`,
-                          showCloseButton: true
-                        }
-                    )
-                  } else if (this.jenis_pembayaran === 'cstore') {
-                    swal.fire(
-                        {
-                          title: `<strong>Cstore Payment</strong>`,
-                          html: `<p>Atas Nama : ${this.currentUser.data.nama}
-                       <br>Nominal : ${res.data.data.nominal}<br>Status Pembayaran : ${res.data.data.status_pembayaran}<br>
-                       Metode Pembayaran : ${res.data.data.metode_pembayaran}<br> Kode Pembayaran : ${res.data.data.kode_pembayaran}
-                       </p>`,
-                          showCloseButton: true
-                        }
-                    )
-                  }
-                  this.$emit('AfterCreated')
-                  this.$Progress.finish()
-                  this.$router.push('/home/wakaf/berjangka')
-
-                }
-            )
-            .catch(err => {
-              console.log(err)
-              swal.fire(
-                  'Gagal!',
-                  'Pastikan anda mengisikan data dengan benar',
-                  'error'
-              )
-              this.$Progress.fail()
-            })
-        // }
-      },
-      getLaporan(){
-          axios.get(URL + '/api/laporan/' + this.currentProgram.id, {headers: authHeader()}).then(function (response) {
-            this.laporannew = response.data;
-            console.log(this.currentProgram.id);
-          }.bind(this));
-      },
-      formatDate(dm) {
-        return moment(dm).format('DD/MM/YYYY');
-      },
-      progressStyle(terkumpul, total) {
-        return {
-          "width": (terkumpul / total) * 100 + '%',
-          height: `${this.height}px`
-        };
-      },
-      displayDeskripsi(){
-        this.displayNow = 0
-      },
-      displayWakaf(){
-        this.displayNow = 1
-      },
+      return all;
     },
-  }
+    allWakafBerjangka(){
+      let all = [];
+      this.currentProgram.wakafberjangka.forEach(berjangka=> {
+        if(berjangka.status_pembayaran=='success')
+          all.push(berjangka)
+      })
+      return all;
+    }
+  },
+  methods : {
+    getActiveClass(id) {
+      if (id === this.metode_pembayaran) {
+        return 'btn btn-outline-info active'
+      } else {
+        return 'btn btn-outline-info'
+      }
+    },
+    pickPayment(metode, jenis) {
+      this.jenis_pembayaran = jenis
+      this.metode_pembayaran = metode
+    },
+    berwakaf(program) {
+      this.selectedProgram = program
+      $('#berWakaf').modal('show')
+    },
+    berwakafAbadi() {
+      this.submitted = true
+      // const formData = new FormData();
+      // this.$v.$touch();
+      this.pembayaranAbadi.UserId = this.currentUser.data.id
+      this.pembayaranAbadi.ProgramId = this.selectedProgram.id
+      if (this.pembayaranAbadi.atas_nama == '') {
+        this.pembayaranAbadi.atas_nama = this.currentUser.data.nama
+      }
+      // if (!this.$v.$invalid) {
+      console.log(this.pembayaranAbadi)
+      this.$Progress.start()
+      axios.post(URL + '/api/wakaf-abadi/', {
+        nominal: this.pembayaranAbadi.nominal,
+        nama_wakif: this.pembayaranAbadi.atas_nama,
+        metode_pembayaran: this.metode_pembayaran,
+        program_wakaf_id: this.pembayaranAbadi.ProgramId,
+        wakif_id: this.pembayaranAbadi.UserId,
+        jenis_pembayaran: this.jenis_pembayaran
+      }, { headers: authHeader() })
+          .then((res) => {
+                this.$emit('AfterCreated')
+                console.log(res)
+                $('#berWakaf')
+                    .modal('hide')
+                if (this.jenis_pembayaran === 'qris') {
+                  swal.fire(
+                      {
+                        title: `<strong>Pindai untuk membayar</strong>`,
+                        imageUrl: `${res.data.data.kode_pembayaran}`,
+                        html: `<p><br><button class="download btn btn-success">Download QR Code</button><br>Atas Nama : ${this.currentUser.data.nama}
+                       <br>Nominal : ${res.data.data.nominal}<br>Status Pembayaran : ${res.data.data.status_pembayaran}<br>
+                       Metode Pembayaran : ${res.data.data.metode_pembayaran}
+                       </p>`,
+                        showCloseButton: true,
+                        willOpen: () => {
+                          const download = document.querySelector('.download')
+
+                          download.addEventListener('click', () => {
+                            saveAs(`${res.data.data.kode_pembayaran}`, 'QR.jpg')
+                          })
+                        }
+                      }
+                  )
+                } else if (this.jenis_pembayaran === 'bank') {
+                  swal.fire(
+                      {
+                        title: `<strong>Transaksi Berhasil</strong>`,
+                        html: `<p>Atas Nama : ${this.currentUser.data.nama}
+                       <br>Nominal : ${res.data.data.nominal}<br>Status Pembayaran : ${res.data.data.status_pembayaran}<br>
+                       Metode Pembayaran : ${res.data.data.metode_pembayaran}<br> Virtual Account : ${res.data.data.kode_pembayaran}
+                       </p>`,
+                        showCloseButton: true
+                      }
+                  )
+                } else if (this.jenis_pembayaran === 'cstore') {
+                  swal.fire(
+                      {
+                        title: `<strong>Cstore Payment</strong>`,
+                        html: `<p>Atas Nama : ${this.currentUser.data.nama}
+                       <br>Nominal : ${res.data.data.nominal}<br>Status Pembayaran : ${res.data.data.status_pembayaran}<br>
+                       Metode Pembayaran : ${res.data.data.metode_pembayaran}<br> Kode Pembayaran : ${res.data.data.kode_pembayaran}
+                       </p>`,
+                        showCloseButton: true
+                      }
+                  )
+                }
+
+                this.$emit('AfterCreated')
+                this.$Progress.finish()
+                this.$router.push('/home/wakaf/abadi')
+              }
+          )
+          .catch(err => {
+            console.log(err)
+            swal.fire(
+                'Gagal!',
+                'Pastikan anda mengisikan data dengan benar',
+                'error'
+            )
+            this.$Progress.fail()
+          })
+      // }
+    },
+    berWakafBerjangka() {
+      this.submitted = true
+      // const formData = new FormData();
+      // this.$v.$touch();
+      this.pembayaranBerjangka.UserId = this.currentUser.data.id
+      this.pembayaranBerjangka.ProgramId = this.selectedProgram.id
+      if (this.pembayaranBerjangka.atas_nama == '') {
+        this.pembayaranBerjangka.atas_nama = this.currentUser.data.nama
+      }
+      // if (!this.$v.$invalid) {
+      this.$Progress.start()
+      axios.post(URL + '/api/wakaf-berjangka/', {
+        nominal: this.pembayaranBerjangka.nominal,
+        nama_wakif: this.pembayaranBerjangka.atas_nama,
+        metode_pembayaran: this.metode_pembayaran,
+        program_wakaf_id: this.pembayaranBerjangka.ProgramId,
+        wakif_id: this.pembayaranBerjangka.UserId,
+        nomor_rekening: this.pembayaranBerjangka.nomor_rekening,
+        nama_pemilik_rekening: this.pembayaranBerjangka.nama_pemilik_rekening,
+        jangka_waktu: this.pembayaranBerjangka.jangka_waktu,
+        nama_bank: this.pembayaranBerjangka.nama_bank,
+        jenis_pembayaran: this.jenis_pembayaran
+      }, {
+        headers: authHeader(),
+        data_wakif: this.currentUser.data
+      })
+          .then((res) => {
+                console.log(res)
+                this.$emit('AfterCreated')
+                $('#berWakaf')
+                    .modal('hide')
+                if (this.jenis_pembayaran === 'qris') {
+                  swal.fire(
+                      {
+                        title: `<strong>Pindai untuk membayar</strong>`,
+                        imageUrl: `${res.data.data.kode_pembayaran}`,
+                        html: `<p><br><button class="download btn btn-success">Download QR Code</button><br>Atas Nama : ${this.currentUser.data.nama}
+                       <br>Nominal : ${res.data.data.nominal}<br>Status Pembayaran : ${res.data.data.status_pembayaran}<br>
+                       Metode Pembayaran : ${res.data.data.metode_pembayaran}
+                       </p>`,
+                        showCloseButton: true,
+                        willOpen: () => {
+                          const download = document.querySelector('.download')
+
+                          download.addEventListener('click', () => {
+                            console.log('disinii')
+                            saveAs(`${res.data.data.kode_pembayaran}`, 'QR.jpg')
+                          })
+                        }
+                      }
+                  )
+                } else if (this.jenis_pembayaran === 'bank') {
+                  swal.fire(
+                      {
+                        title: `<strong>Transaksi Berhasil</strong>`,
+                        html: `<p>Atas Nama : ${this.currentUser.data.nama}
+                       <br>Nominal : ${res.data.data.nominal}<br>Status Pembayaran : ${res.data.data.status_pembayaran}<br>
+                       Metode Pembayaran : ${res.data.data.metode_pembayaran}<br> Virtual Account : ${res.data.data.kode_pembayaran}
+                       </p>`,
+                        showCloseButton: true
+                      }
+                  )
+                } else if (this.jenis_pembayaran === 'cstore') {
+                  swal.fire(
+                      {
+                        title: `<strong>Cstore Payment</strong>`,
+                        html: `<p>Atas Nama : ${this.currentUser.data.nama}
+                       <br>Nominal : ${res.data.data.nominal}<br>Status Pembayaran : ${res.data.data.status_pembayaran}<br>
+                       Metode Pembayaran : ${res.data.data.metode_pembayaran}<br> Kode Pembayaran : ${res.data.data.kode_pembayaran}
+                       </p>`,
+                        showCloseButton: true
+                      }
+                  )
+                }
+                this.$emit('AfterCreated')
+                this.$Progress.finish()
+                this.$router.push('/home/wakaf/berjangka')
+
+              }
+          )
+          .catch(err => {
+            console.log(err)
+            swal.fire(
+                'Gagal!',
+                'Pastikan anda mengisikan data dengan benar',
+                'error'
+            )
+            this.$Progress.fail()
+          })
+      // }
+    },
+    getLaporan(){
+      axios.get(URL + '/api/laporan/' + this.currentProgram.id, {headers: authHeader()}).then(function (response) {
+        this.laporannew = response.data;
+        console.log(this.currentProgram.id);
+      }.bind(this));
+    },
+    formatDate(dm) {
+      return moment(dm).format('DD/MM/YYYY');
+    },
+    progressStyle(terkumpul, total) {
+      return {
+        "width": (terkumpul / total) * 100 + '%',
+        height: `${this.height}px`
+      };
+    },
+    displayDeskripsi(){
+      this.displayNow = 0
+    },
+    displayWakaf(){
+      this.displayNow = 1
+    },
+  },
+}
 </script>
 <style scoped>
 .bg-overlay {
