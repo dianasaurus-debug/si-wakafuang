@@ -11,7 +11,7 @@
                   <div class="card-block text-center text-white">
                       <div size="80" class="user">
                         <img :src="'https://wakaf.praditya.web.id/images/'+currentUser.data.foto" class="profile-img">
-                        <i class="fas fa-upload" @click="$refs.FileInput.click()"></i>
+                        <a @click="$refs.FileInput.click()"><i class="fas fa-upload"></i></a>
                         <input ref="FileInput" type="file" style="display: none;" @change="onFileSelect" />
                       </div>
                     <h6 class="f-w-600">{{ currentUser.data.nama }}</h6>

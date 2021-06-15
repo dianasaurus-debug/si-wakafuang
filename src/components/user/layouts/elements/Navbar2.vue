@@ -4,7 +4,7 @@
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        <a class="nav-link" data-toggle="push-menu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
     </ul>
 
@@ -28,6 +28,6 @@ export default {
 </script>
 <style scoped>
 nav {
-  z-index : -1;
+  z-index:100;
 }
 </style>

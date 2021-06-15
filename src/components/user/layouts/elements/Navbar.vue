@@ -60,5 +60,9 @@ export default {
 .nav-link {
   color: #fff !important;
 }
+nav {
+  position:relative;
+  z-index: 1000;
+}
 
 </style>
