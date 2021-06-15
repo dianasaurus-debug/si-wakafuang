@@ -14,8 +14,8 @@
                 <div class="form-group"><label for="search-field"><i class="fa fa-search text-white"></i></label><input class="form-control search-field" type="search" id="search-field" name="search"></div>
               </form>
               <div v-if="currentUser==null">
-                <span class="navbar-text"> <router-link class="login" to="/login">Log In</router-link></span>
-                <router-link class="btn btn-light action-button" role="button" to="/register">Signup</router-link>
+                <span class="navbar-text"> <router-link class="login" to="/login">Masuk</router-link></span>
+                <router-link class="btn btn-light action-button" role="button" to="/register">Daftar</router-link>
               </div>
               <div v-else>
                 <router-link class="btn btn-light action-button" role="button" to="/home">Home</router-link>

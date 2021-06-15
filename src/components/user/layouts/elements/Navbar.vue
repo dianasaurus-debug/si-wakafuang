@@ -17,10 +17,10 @@
           <router-link class="nav-link" to="/about-us">About Us</router-link>
         </li>
         <li class="nav-item">
-          <router-link class="btn btn-outline-success my-2 my-sm-0 mr-2" tag="button" to="/login" v-if="!currentUser">Login</router-link>
+          <router-link class="btn btn-outline-success my-2 my-sm-0 mr-2" tag="button" to="/login" v-if="!currentUser">Masuk</router-link>
         </li>
         <li class="nav-item">
-          <router-link class="btn btn-outline-success my-2 my-sm-0 mr-2" tag="button" to="/register" v-if="!currentUser">Register</router-link>
+          <router-link class="btn btn-outline-success my-2 my-sm-0 mr-2" tag="button" to="/register" v-if="!currentUser">Daftar</router-link>
         </li>
 
         <li class="nav-item dropdown" v-if="currentUser">
