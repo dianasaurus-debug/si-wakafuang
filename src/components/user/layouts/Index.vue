@@ -23,6 +23,9 @@ export default {
   </div>
 </template>
 <style>
+.container {
+  max-width:1140px !important;
+}
 /* Sticky footer styles
 -------------------------------------------------- */
 html {

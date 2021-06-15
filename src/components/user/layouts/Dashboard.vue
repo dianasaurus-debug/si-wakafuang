@@ -2,9 +2,10 @@
 import NavBar from "./elements/Navbar"
 import Footer from "./elements/Footer";
 import Navbar2 from "@/components/user/layouts/elements/Navbar2";
+import Sidebar from "@/components/user/layouts/elements/Sidebar";
 import 'admin-lte/dist/css/adminlte.css'
 import 'admin-lte/dist/js/adminlte'
-import Sidebar from "@/components/user/layouts/elements/Sidebar";
+
 export default {
   components: {
     Sidebar,

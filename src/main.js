@@ -24,9 +24,6 @@ import titleMixin from './utils/titleMixins'
 import VueRs from "@appbaseio/reactivesearch-vue";
 
 // register directive v-money and component <money>
-// import 'vuetify/dist/vuetify.min.css'
-//
-// Vue.use(Vuetify)
 Vue.use(VueRs);
 Vue.use(Vuelidate);
 Vue.use(VueProgressBar, {
