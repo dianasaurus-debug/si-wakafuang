@@ -21,7 +21,8 @@
             </div>
             <h2>{{ currentProgram.judul }}</h2>
             <h6 class="card-text text-justify text-white-50 mt-2 mb-2">
-              <span class="font-weight-bold text-white">Terkumpul </span> : {{ currentProgram.wakaf_abadi_terkumpul+currentProgram.wakaf_berjangka_terkumpul | filterMoney }}
+              <span class="font-weight-bold text-white">Wakaf Abadi Terkumpul </span> : {{ currentProgram.wakaf_abadi_terkumpul | filterMoney }} <br>
+              <span class="font-weight-bold text-white">Wakaf Berjangka Terkumpul </span> : {{ currentProgram.wakaf_berjangka_terkumpul | filterMoney }}
             </h6>
 <!--            <div style="max-width: 1000px">-->
 <!--              <div class="progress" style="height:20px;">-->
@@ -34,7 +35,7 @@
 <!--            </div>-->
 <!--            <p class="text-left mt-5"><span class="mr-2"><i class="fa fa-calendar"></i></span>{{formatDate(currentProgram.created_at)}} - {{formatDate(currentProgram.deadline)}}</p>-->
 <!--            <p class="text-left"><span class="mr-2"><i class="fa fa-sitemap"></i></span>{{ currentProgram.alamat}}</p>-->
-            <p><a class="btn btn-primary btn-lg mt-2" href="#" role="button" @click="berWakaf(currentProgram)">Berwakaf</a></p>
+            <p><a class="btn btn-primary btn-lg mt-2" href="#" role="button" @click="berwakaf(currentProgram)">Berwakaf</a></p>
           </div>
         </div>
 
@@ -62,47 +63,6 @@
                       {{currentProgram.deskripsi}}
                     </p>
                   </div>
-<!--                  <div class="tab-pane fade" id="nav-wakaf" role="tabpanel" aria-labelledby="nav-wakaf-tab">-->
-<!--&lt;!&ndash;                    <select class="form-control mb-3 mt-2 col-md-4 ml-auto" v-model="isAbadi">&ndash;&gt;-->
-<!--&lt;!&ndash;                      <option v-bind:value="1" selected>Abadi</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                      <option v-bind:value="0">Berjangka</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </select>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <div v-if="isAbadi==1">&ndash;&gt;-->
-<!--&lt;!&ndash;                      <vue-good-table&ndash;&gt;-->
-<!--&lt;!&ndash;                          :columns="columns"&ndash;&gt;-->
-<!--&lt;!&ndash;                          :rows="allWakafAbadi"&ndash;&gt;-->
-<!--&lt;!&ndash;                          :search-options="{ enabled: true }"&ndash;&gt;-->
-<!--&lt;!&ndash;                          :pagination-options="{enabled: true}"&ndash;&gt;-->
-<!--&lt;!&ndash;                          :line-numbers="true">&ndash;&gt;-->
-<!--&lt;!&ndash;                        <template slot="table-row" slot-scope="props">&ndash;&gt;-->
-<!--&lt;!&ndash;                          <span v-if="props.column.field == 'nominal'">&ndash;&gt;-->
-<!--&lt;!&ndash;                                  {{props.row.nominal | filterMoney}}&ndash;&gt;-->
-<!--&lt;!&ndash;                                </span>&ndash;&gt;-->
-<!--&lt;!&ndash;                          <span v-else>&ndash;&gt;-->
-<!--&lt;!&ndash;                                  {{props.formattedRow[props.column.field]}}&ndash;&gt;-->
-<!--&lt;!&ndash;                                </span>&ndash;&gt;-->
-<!--&lt;!&ndash;                        </template>&ndash;&gt;-->
-<!--&lt;!&ndash;                      </vue-good-table>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <div v-else-if="isAbadi==0">&ndash;&gt;-->
-<!--&lt;!&ndash;                      <vue-good-table&ndash;&gt;-->
-<!--&lt;!&ndash;                          :columns="columns"&ndash;&gt;-->
-<!--&lt;!&ndash;                          :rows="allWakafBerjangka"&ndash;&gt;-->
-<!--&lt;!&ndash;                          :search-options="{ enabled: true }"&ndash;&gt;-->
-<!--&lt;!&ndash;                          :pagination-options="{enabled: true}"&ndash;&gt;-->
-<!--&lt;!&ndash;                          :line-numbers="true">&ndash;&gt;-->
-<!--&lt;!&ndash;                        <template slot="table-row" slot-scope="props">&ndash;&gt;-->
-<!--&lt;!&ndash;                          <span v-if="props.column.field == 'nominal'">&ndash;&gt;-->
-<!--&lt;!&ndash;                                  {{props.row.nominal | filterMoney}}&ndash;&gt;-->
-<!--&lt;!&ndash;                                </span>&ndash;&gt;-->
-<!--&lt;!&ndash;                          <span v-else>&ndash;&gt;-->
-<!--&lt;!&ndash;                                  {{props.formattedRow[props.column.field]}}&ndash;&gt;-->
-<!--&lt;!&ndash;                                </span>&ndash;&gt;-->
-<!--&lt;!&ndash;                        </template>&ndash;&gt;-->
-<!--&lt;!&ndash;                      </vue-good-table>&ndash;&gt;-->
-
-<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
-<!--                  </div>-->
                   <div class="tab-pane fade" id="nav-laporan" role="tabpanel" aria-labelledby="nav-laporan-tab">
                     <div class="container mt-3">
                       <div class="row">
@@ -160,6 +120,216 @@
 
     <!-- Modal -->
   </div>
+    <!-- Modal -->
+    <div class="modal fade" id="berWakaf" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
+         aria-labelledby="berWakaf" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Berwakaf</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form @submit.prevent="jenisWakafAbadi ? berwakafAbadi() : berWakafBerjangka()">
+            <div class="modal-body">
+              <div class="card" style="max-width: 700px">
+                <div class="card-horizontal">
+                  <div class="img-square-wrapper">
+                    <img class="" :src="'https://wakaf.praditya.web.id/images/'+selectedProgram.gambar" width="200px"
+                         alt="Card image cap">
+                  </div>
+                  <div class="card-body">
+                    <h4 class="card-title"><b>{{ selectedProgram.judul }}</b></h4>
+                  </div>
+                </div>
+              </div>
+              <h5 class="font-weight-bold">Jenis Wakaf Uang</h5>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                       v-bind:value="true"
+                       v-model="jenisWakafAbadi">
+                <label class="form-check-label" for="inlineRadio1">Wakaf Abadi</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                       v-bind:value="false" v-model="jenisWakafAbadi">
+                <label class="form-check-label" for="inlineRadio2">Wakaf Berjangka</label>
+              </div>
+              <div class="form-group">
+                <h5 class="font-weight-bold">Wakaf Untuk</h5>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="dirisendiri" v-model="dirisendiri"
+                         id="dirisendiriradio" :value="true">
+                  <label class="form-check-label" for="dirisendiriradio">Diri Sendiri</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="oranglain" v-model="dirisendiri"
+                         id="oranglainradio" :value="false">
+                  <label class="form-check-label" for="oranglainradio">Orang Lain</label>
+                </div>
+              </div>
+              <div class="row mb-2" v-if="jenisWakafAbadi==true">
+                <div class="col-4 input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" style="color : cornflowerblue; font-weight: bold">Rp.</span>
+                  </div>
+                  <money v-model="pembayaranAbadi.nominal"
+                         class="form-control"
+                         :class="{ 'is-invalid': submitted && $v.pembayaranAbadi.nominal.$error }">
+                    >
+                  </money>
+                  <div v-if="submitted && $v.pembayaranAbadi.nominal.$error" class="invalid-feedback">
+                    <span v-if="!$v.pembayaranAbadi.nominal.required">Nominal is required</span>
+                  </div>
+                </div>
+                <div class="col-8 input-group" v-if="dirisendiri==false">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" style="color : cornflowerblue; font-weight: bold"><i
+                        class="fa fa-user"></i></span>
+                  </div>
+                  <input name="atas_nama" class="form-control" placeholder="Atas Nama" type="text"
+                         v-model="pembayaranAbadi.atas_nama"
+                         :class="{ 'is-invalid': submitted && $v.pembayaranAbadi.atas_nama.$error }">
+                  <div v-if="submitted && $v.pembayaranAbadi.atas_nama.$error" class="invalid-feedback">
+                    <span v-if="!$v.pembayaranAbadi.atas_nama.required">Atas Nama is required</span>
+                  </div>
+                </div>
+              </div>
+              <div v-if="jenisWakafAbadi==false">
+                <div class="row mb-3">
+                  <div class="col-4 input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" style="color : cornflowerblue; font-weight: bold">Rp.</span>
+                    </div>
+                    <money v-model="pembayaranBerjangka.nominal"
+                           class="form-control"
+                           :class="{ 'is-invalid': submitted && $v.pembayaranBerjangka.nominal.$error }">
+                      >
+                    </money>
+                    <div v-if="submitted && $v.pembayaranBerjangka.nominal.$error" class="invalid-feedback">
+                      <span v-if="!$v.pembayaranBerjangka.nominal.required">Nominal is required</span>
+                    </div>
+                  </div>
+                  <div class="col-8 input-group" v-if="dirisendiri==false">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" style="color : cornflowerblue; font-weight: bold"><i
+                          class="fa fa-user"></i></span>
+                    </div>
+                    <input name="target" class="form-control" placeholder="Atas Nama" type="text"
+                           v-model="pembayaranBerjangka.atas_nama"
+                           :class="{ 'is-invalid': submitted && $v.pembayaranBerjangka.atas_nama.$error }">
+                    <div v-if="submitted && $v.pembayaranBerjangka.atas_nama.$error" class="invalid-feedback">
+                      <span v-if="!$v.pembayaranBerjangka.atas_nama.required">Atas Nama is required</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group mb-2">
+                  <label>Keterangan Pengembalian Uang</label>
+                  <select class="form-control" v-model="pembayaranBerjangka.nama_bank"
+                          :class="{ 'is-invalid': submitted && $v.pembayaranBerjangka.nama_bank.$error }">
+                    <option value="" disabled hidden>Nama Bank</option>
+                    <option v-for="bank in daftar_bank" v-bind:key="bank" :value="bank">{{ bank }}</option>
+                  </select>
+                  <div v-if="submitted && $v.pembayaranBerjangka.nama_bank.$error" class="invalid-feedback">
+                    <span v-if="!$v.pembayaranBerjangka.nama_bank.required">Nama Bank is required</span>
+                  </div>
+                </div> <!-- form-group// -->
+                <div class="row mb-2">
+                  <div class="col-4 input-group">
+                    <input name="target" class="form-control" placeholder="Rekening Pengembalian" type="number"
+                           v-model="pembayaranBerjangka.nomor_rekening"
+                           :class="{ 'is-invalid': submitted && $v.pembayaranBerjangka.nomor_rekening.$error }">
+                    <div v-if="submitted && $v.pembayaranBerjangka.nomor_rekening.$error" class="invalid-feedback">
+                      <span v-if="!$v.pembayaranBerjangka.nomor_rekening.required">Rekening is required</span>
+                    </div>
+                  </div>
+                  <div class="col-8 input-group">
+                    <input name="target" class="form-control" placeholder="Atas Nama" type="text"
+                           v-model="pembayaranBerjangka.nama_pemilik_rekening"
+                           :class="{ 'is-invalid': submitted && $v.pembayaranBerjangka.nama_pemilik_rekening.$error }">
+                    <div v-if="submitted && $v.pembayaranBerjangka.nama_pemilik_rekening.$error"
+                         class="invalid-feedback">
+                      <span v-if="!$v.pembayaranBerjangka.nama_pemilik_rekening.required">Atas Nama is required</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group mb-2">
+                  <select class="form-control" v-model="pembayaranBerjangka.jangka_waktu"
+                          :class="{ 'is-invalid': submitted && $v.pembayaranBerjangka.jangka_waktu.$error }">
+                    <option value="" disabled hidden>Jangka Waktu Wakaf</option>
+                    <option value="1">
+                      1 Tahun
+                    </option>
+                    <option value="2">
+                      2 Tahun
+                    </option>
+                    <option value="3">
+                      3 Tahun
+                    </option>
+                    <option value="4">
+                      4 Tahun
+                    </option>
+                    <option value="5">
+                      5 Tahun
+                    </option>
+                  </select>
+                  <div v-if="submitted && $v.pembayaranBerjangka.jangka_waktu.$error" class="invalid-feedback">
+                    <span v-if="!$v.pembayaranBerjangka.jangka_waktu.required">Jangka Waktu Wakaf is required</span>
+                  </div>
+
+                </div> <!-- form-group// -->
+              </div>
+              <div class="row mt-2">
+                <h5 class="mb-2">Metode Pembayaran</h5>
+                <div class="col-12">
+                  <div class="form-group">
+                    <table style="border : 0px;padding : 4px">
+                      <tr>
+                        <td>
+                          <button @click.prevent="pickPayment('bca', 'bank');" :class="getActiveClass('bca')"
+                                  style="display: block;"><img src="@/assets/images/logo_bank_bca.png" height="20px">
+                          </button>
+                        </td>
+                        <td>
+                          <button @click.prevent="pickPayment('bri', 'bank')" :class="getActiveClass('bri')"
+                                  style="display: block;"><img src="@/assets/images/logo-bri.png" height="20px">
+                          </button>
+                        </td>
+                        <td>
+                          <button @click.prevent="pickPayment('bni', 'bank')" :class="getActiveClass('bni')"
+                                  style="display: block;"><img src="@/assets/images/logo-bni.png" height="20px">
+                          </button>
+                        </td>
+                        <td>
+                          <button @click.prevent="pickPayment('alfamart', 'cstore')" :class="getActiveClass('alfamart')"
+                                  style="display: block;"><img src="@/assets/images/alfamart.png" height="20px">
+                          </button>
+                        </td>
+                        <td>
+                          <button @click.prevent="pickPayment('indomaret', 'cstore')"
+                                  :class="getActiveClass('indomaret')" style="display: block;"><img
+                              src="@/assets/images/indomaret.png" height="20px"></button>
+                        </td>
+                        <td>
+                          <button @click.prevent="pickPayment('gopay', 'qris')" :class="getActiveClass('gopay')"
+                                  style="display: block;"><img src="@/assets/images/qris.png" height="20px"></button>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Bayar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -169,7 +339,24 @@
   import $ from 'jquery'
   import moment from "moment";
   const URL = 'https://wakaf.praditya.web.id'
+  import { required } from 'vuelidate/lib/validators'
+  import swal from 'sweetalert2'
+  import { saveAs } from 'file-saver'
   export default {
+    validations: {
+      pembayaranAbadi: {
+        nominal: { required },
+        atas_nama: { required }
+      },
+      pembayaranBerjangka: {
+        nominal: { required },
+        atas_nama: { required },
+        jangka_waktu: { required },
+        nama_bank: { required },
+        nomor_rekening: { required },
+        nama_pemilik_rekening: { required }
+      }
+    },
     title: 'Detail Program Wakaf',
       created(){
         this.getLaporan();
@@ -193,7 +380,31 @@
           per_page: 5,
           displayNow : 0,
           laporannew : [],
-          today : moment()
+          today : moment(),
+          jenisWakafAbadi: true,
+          jenis_pembayaran: '',
+          metode_pembayaran: '',
+          dirisendiri: true,
+          katakunci : '',
+          pembayaranAbadi: {
+            nominal: '',
+            atas_nama: '',
+            UserId: '',
+            ProgramId: ''
+          },
+          pembayaranBerjangka: {
+            nominal: '',
+            atas_nama: '',
+            UserId: '',
+            ProgramId: '',
+            nomor_rekening: '',
+            nama_pemilik_rekening: '',
+            jangka_waktu: '',
+            nama_bank: ''
+          },
+          daftar_bank: ['Bank Mandiri', 'Bank Bukopin', 'Bank Danamon', 'Bank Mega', 'Bank CIMB Niaga', 'Bank BNI', 'Bank Permata', 'Bank BRI',
+            'Bank Sinarmas', 'Bank Jatim', 'Bank Maybank'],
+          submitted: false
         }
       },
 
@@ -227,8 +438,195 @@
         }
       },
     methods : {
-      berWakaf(program){
-          this.$root.$emit("berwakaf", program)
+      getActiveClass(id) {
+        if (id === this.metode_pembayaran) {
+          return 'btn btn-outline-info active'
+        } else {
+          return 'btn btn-outline-info'
+        }
+      },
+      pickPayment(metode, jenis) {
+        this.jenis_pembayaran = jenis
+        this.metode_pembayaran = metode
+      },
+      berwakaf(program) {
+        this.selectedProgram = program
+        $('#berWakaf').modal('show')
+      },
+      berwakafAbadi() {
+        this.submitted = true
+        // const formData = new FormData();
+        // this.$v.$touch();
+        this.pembayaranAbadi.UserId = this.currentUser.data.id
+        this.pembayaranAbadi.ProgramId = this.selectedProgram.id
+        if (this.pembayaranAbadi.atas_nama == '') {
+          this.pembayaranAbadi.atas_nama = this.currentUser.data.nama
+        }
+        // if (!this.$v.$invalid) {
+        console.log(this.pembayaranAbadi)
+        this.$Progress.start()
+        axios.post(URL + '/api/wakaf-abadi/', {
+          nominal: this.pembayaranAbadi.nominal,
+          nama_wakif: this.pembayaranAbadi.atas_nama,
+          metode_pembayaran: this.metode_pembayaran,
+          program_wakaf_id: this.pembayaranAbadi.ProgramId,
+          wakif_id: this.pembayaranAbadi.UserId,
+          jenis_pembayaran: this.jenis_pembayaran
+        }, { headers: authHeader() })
+            .then((res) => {
+                  this.$emit('AfterCreated')
+                  console.log(res)
+                  $('#berWakaf')
+                      .modal('hide')
+                  if (this.jenis_pembayaran === 'qris') {
+                    swal.fire(
+                        {
+                          title: `<strong>Pindai untuk membayar</strong>`,
+                          imageUrl: `${res.data.data.kode_pembayaran}`,
+                          html: `<p><br><button class="download btn btn-success">Download QR Code</button><br>Atas Nama : ${this.currentUser.data.nama}
+                       <br>Nominal : ${res.data.data.nominal}<br>Status Pembayaran : ${res.data.data.status_pembayaran}<br>
+                       Metode Pembayaran : ${res.data.data.metode_pembayaran}
+                       </p>`,
+                          showCloseButton: true,
+                          willOpen: () => {
+                            const download = document.querySelector('.download')
+
+                            download.addEventListener('click', () => {
+                              saveAs(`${res.data.data.kode_pembayaran}`, 'QR.jpg')
+                            })
+                          }
+                        }
+                    )
+                  } else if (this.jenis_pembayaran === 'bank') {
+                    swal.fire(
+                        {
+                          title: `<strong>Transaksi Berhasil</strong>`,
+                          html: `<p>Atas Nama : ${this.currentUser.data.nama}
+                       <br>Nominal : ${res.data.data.nominal}<br>Status Pembayaran : ${res.data.data.status_pembayaran}<br>
+                       Metode Pembayaran : ${res.data.data.metode_pembayaran}<br> Virtual Account : ${res.data.data.kode_pembayaran}
+                       </p>`,
+                          showCloseButton: true
+                        }
+                    )
+                  } else if (this.jenis_pembayaran === 'cstore') {
+                    swal.fire(
+                        {
+                          title: `<strong>Cstore Payment</strong>`,
+                          html: `<p>Atas Nama : ${this.currentUser.data.nama}
+                       <br>Nominal : ${res.data.data.nominal}<br>Status Pembayaran : ${res.data.data.status_pembayaran}<br>
+                       Metode Pembayaran : ${res.data.data.metode_pembayaran}<br> Kode Pembayaran : ${res.data.data.kode_pembayaran}
+                       </p>`,
+                          showCloseButton: true
+                        }
+                    )
+                  }
+
+                  this.$emit('AfterCreated')
+                  this.$Progress.finish()
+                  this.$router.push('/home/wakaf/abadi')
+                }
+            )
+            .catch(err => {
+              console.log(err)
+              swal.fire(
+                  'Gagal!',
+                  'Pastikan anda mengisikan data dengan benar',
+                  'error'
+              )
+              this.$Progress.fail()
+            })
+        // }
+      },
+      berWakafBerjangka() {
+        this.submitted = true
+        // const formData = new FormData();
+        // this.$v.$touch();
+        this.pembayaranBerjangka.UserId = this.currentUser.data.id
+        this.pembayaranBerjangka.ProgramId = this.selectedProgram.id
+        if (this.pembayaranBerjangka.atas_nama == '') {
+          this.pembayaranBerjangka.atas_nama = this.currentUser.data.nama
+        }
+        // if (!this.$v.$invalid) {
+        this.$Progress.start()
+        axios.post(URL + '/api/wakaf-berjangka/', {
+          nominal: this.pembayaranBerjangka.nominal,
+          nama_wakif: this.pembayaranBerjangka.atas_nama,
+          metode_pembayaran: this.metode_pembayaran,
+          program_wakaf_id: this.pembayaranBerjangka.ProgramId,
+          wakif_id: this.pembayaranBerjangka.UserId,
+          nomor_rekening: this.pembayaranBerjangka.nomor_rekening,
+          nama_pemilik_rekening: this.pembayaranBerjangka.nama_pemilik_rekening,
+          jangka_waktu: this.pembayaranBerjangka.jangka_waktu,
+          nama_bank: this.pembayaranBerjangka.nama_bank,
+          jenis_pembayaran: this.jenis_pembayaran
+        }, {
+          headers: authHeader(),
+          data_wakif: this.currentUser.data
+        })
+            .then((res) => {
+                  console.log(res)
+                  this.$emit('AfterCreated')
+                  $('#berWakaf')
+                      .modal('hide')
+                  if (this.jenis_pembayaran === 'qris') {
+                    swal.fire(
+                        {
+                          title: `<strong>Pindai untuk membayar</strong>`,
+                          imageUrl: `${res.data.data.kode_pembayaran}`,
+                          html: `<p><br><button class="download btn btn-success">Download QR Code</button><br>Atas Nama : ${this.currentUser.data.nama}
+                       <br>Nominal : ${res.data.data.nominal}<br>Status Pembayaran : ${res.data.data.status_pembayaran}<br>
+                       Metode Pembayaran : ${res.data.data.metode_pembayaran}
+                       </p>`,
+                          showCloseButton: true,
+                          willOpen: () => {
+                            const download = document.querySelector('.download')
+
+                            download.addEventListener('click', () => {
+                              console.log('disinii')
+                              saveAs(`${res.data.data.kode_pembayaran}`, 'QR.jpg')
+                            })
+                          }
+                        }
+                    )
+                  } else if (this.jenis_pembayaran === 'bank') {
+                    swal.fire(
+                        {
+                          title: `<strong>Transaksi Berhasil</strong>`,
+                          html: `<p>Atas Nama : ${this.currentUser.data.nama}
+                       <br>Nominal : ${res.data.data.nominal}<br>Status Pembayaran : ${res.data.data.status_pembayaran}<br>
+                       Metode Pembayaran : ${res.data.data.metode_pembayaran}<br> Virtual Account : ${res.data.data.kode_pembayaran}
+                       </p>`,
+                          showCloseButton: true
+                        }
+                    )
+                  } else if (this.jenis_pembayaran === 'cstore') {
+                    swal.fire(
+                        {
+                          title: `<strong>Cstore Payment</strong>`,
+                          html: `<p>Atas Nama : ${this.currentUser.data.nama}
+                       <br>Nominal : ${res.data.data.nominal}<br>Status Pembayaran : ${res.data.data.status_pembayaran}<br>
+                       Metode Pembayaran : ${res.data.data.metode_pembayaran}<br> Kode Pembayaran : ${res.data.data.kode_pembayaran}
+                       </p>`,
+                          showCloseButton: true
+                        }
+                    )
+                  }
+                  this.$emit('AfterCreated')
+                  this.$Progress.finish()
+                  this.$router.push('/home/wakaf/berjangka')
+
+                }
+            )
+            .catch(err => {
+              console.log(err)
+              swal.fire(
+                  'Gagal!',
+                  'Pastikan anda mengisikan data dengan benar',
+                  'error'
+              )
+              this.$Progress.fail()
+            })
+        // }
       },
       getLaporan(){
           axios.get(URL + '/api/laporan/' + this.currentProgram.id, {headers: authHeader()}).then(function (response) {
@@ -260,6 +658,43 @@
   background-size: cover;
   background-position: center center;
   color: #fff;
-
 }
+.form-control {
+  border-radius: 7px;
+  border: 1.5px solid #E3E6ED
+}
+
+input.form-control:focus {
+  box-shadow: none;
+  border: 1.5px solid #E3E6ED;
+  background-color: #F7F8FD;
+  letter-spacing: 1px
+}
+
+.btn-primary {
+  background-color: #5878FF !important;
+  border-radius: 7px
+}
+
+.btn-primary:focus {
+  box-shadow: none
+}
+
+.card-horizontal {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+input[type=radio] {
+  margin-right: 3px;
+  border: 0px;
+  height: 3em;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 18vw;
+  object-fit: cover;
+}
+
 </style>

@@ -69,6 +69,10 @@
               <br>
               <!--Title-->
               <h4 class="card-title mb-2" style="font-size: 20px;font-weight: bold">{{ program.judul }}</h4>
+              <h6 class="card-text text-justify text-white-50 mt-2 mb-2">
+                <span class="font-weight-bold text-white">Wakaf Abadi Terkumpul </span> : {{ currentProgram.wakaf_abadi_terkumpul | filterMoney }} <br>
+                <span class="font-weight-bold text-white">Wakaf Berjangka Terkumpul </span> : {{ currentProgram.wakaf_berjangka_terkumpul | filterMoney }}
+              </h6>
               <!--Text-->
               <p class="card-text text-justify" style="font-size: 12px;">
                 {{ program.deskripsi | truncate(150, '...') }}
@@ -329,11 +333,6 @@ export default {
       nomor_rekening: { required },
       nama_pemilik_rekening: { required }
     }
-  },
-  mounted(){
-    this.$root.$on("berwakaf", () => {
-      return this.berwakaf(program);
-    });
   },
   computed: {
     currentUser() {
