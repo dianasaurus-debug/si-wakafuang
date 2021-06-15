@@ -58,8 +58,8 @@
             </p>
           </div>
           <div class="text-center w-100">
-            <p class="text-muted font-weight-bold">Forgot Password?
-              <router-link to="/forgot-password/request" class="text-primary ml-2">Reset Password</router-link>
+            <p class="text-muted font-weight-bold">Lupa kata sandi?
+              <router-link to="/forgot-password/request" class="text-primary ml-2">Atur ulang kata sandi</router-link>
             </p>
           </div>
         </div>

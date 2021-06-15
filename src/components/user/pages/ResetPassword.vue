@@ -34,7 +34,7 @@
                     <label class="sr-only">Konfirmasi Password Baru</label>
                     <input type="password" class="form-control" v-model="password_reset.confirmPassword" placeholder="******">
                   </div>
-                  <button type="submit" class="btn btn-primary btn-lg">Kirim</button>
+                  <button type="submit" class="btn btn-primary btn-lg">Atur Ulang</button>
                 </form>
               </div>
             </div>
@@ -52,6 +52,7 @@ import swal from 'sweetalert2'
 const URL = 'https://wakaf.praditya.web.id'
 
 export default {
+  title: 'Atur Ulang Sandi',
   data() {
     return {
       requestEmail: '',
