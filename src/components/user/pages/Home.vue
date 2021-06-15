@@ -123,7 +123,7 @@
                       </tr>
                     </div>
                     <div v-else>
-                      <h5>Data Wakaf Kosong</h5>
+                      <h5 class="text-muted text-center">Data Wakaf Kosong</h5>
                     </div>
                     </tbody>
                   </table>
