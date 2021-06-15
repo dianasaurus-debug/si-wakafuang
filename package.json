@@ -11,7 +11,7 @@
   "dependencies": {
     "@appbaseio/reactivesearch-vue": "^1.0.0-beta.3",
     "@fortawesome/fontawesome-free": "^5.15.2",
-    "admin-lte": "^3.1.0-rc",
+    "admin-lte": "^3.1.0",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "bootstrap-vue": "^2.21.2",
@@ -54,10 +54,7 @@
     "eslint-plugin-compat": "^3.9.0",
     "eslint-plugin-vue": "^6.2.2",
     "sass": "^1.35.0",
-    "sass-loader": "^10.0.0",
-    "vue-cli-plugin-vuetify": "~2.2.2",
-    "vue-template-compiler": "^2.6.11",
-    "vuetify-loader": "^1.7.2"
+    "sass-loader": "^10.0.0"
   },
   "eslintConfig": {
     "root": true,
