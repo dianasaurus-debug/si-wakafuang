@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:4000/api/admin-auth/';
+const API_URL = 'https://wakaf.praditya.web.id/api/wakif-auth/';
 
 class AuthAdminService {
     login(user) {
