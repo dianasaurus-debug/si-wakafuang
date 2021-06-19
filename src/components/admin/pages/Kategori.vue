@@ -19,11 +19,11 @@
               :search-options="{ enabled: true }"
               :pagination-options="{enabled: true}"
               :line-numbers="true">
-                        <template slot="table-row" slot-scope="props">
+            <template slot="table-row" slot-scope="props">
                                             <span v-if="props.column.field == 'gambar'">
-                                              <img :src="'http://localhost:4000/images/'+props.row.gambar" width="100px">
+                                              <img :src="'https://wakaf.praditya.web.id/images/'+props.row.gambar" width="100px">
                                             </span>
-                                            <span v-else-if="props.column.field == 'action'">
+              <span v-else-if="props.column.field == 'action'">
                                               <a href="#" class="mr-2" @click="viewKategori(props.row.id)">
                                                 <i class="fas fa-eye"></i>
                                               </a>
@@ -34,10 +34,10 @@
                                                     <i class="fas fa-trash" style="color : red !important;"></i>
                                                 </a>
                                             </span>
-                          <span v-else>
+              <span v-else>
                                               {{ props.formattedRow[props.column.field] }}
                                             </span>
-                        </template>
+            </template>
           </vue-good-table>
         </div>
       </div>
@@ -101,7 +101,7 @@ import axios from 'axios';
 import {required} from "vuelidate/lib/validators";
 import swal from 'sweetalert2'
 import $ from 'jquery'
-const URL = 'http://localhost:4000'
+const URL = 'https://wakaf.praditya.web.id'
 import authHeader from '../../../services/auth-header-admin.service';
 
 
@@ -115,7 +115,7 @@ export default {
   },
   data() {
     return {
-      imagePreview: 'http://localhost:4000/images/image_placeholder.png',
+      imagePreview: 'https://www.pikpng.com/pngl/b/74-745720_download-img-icon-png-clipart.png',
       kategori : {
         nama :'',
         gambar : '',
@@ -152,14 +152,14 @@ export default {
   },
   methods : {
     newModal() {
-      this.imagePreview = 'http://localhost:4000/images/image_placeholder.png';
+      this.imagePreview = 'https://www.pikpng.com/pngl/b/74-745720_download-img-icon-png-clipart.png';
       this.kategori = {};
       this.editMode = false;
       $("#addNew").modal('show');
     },
     editModal(kategori){
       this.submitted = false
-      this.imagePreview = 'http://localhost:4000/images/'+kategori.gambar;
+      this.imagePreview = `${URL}/images/`+kategori.gambar;
       this.kategori = kategori;
       this.editMode = true;
       $('#addNew')
@@ -265,9 +265,16 @@ export default {
                 'Data Kategori sudah dihapus',
                 'success'
             )
+          }).catch(err => {
+            swal.fire(
+                'Gagal!',
+                'Kategori tidak bisa dihapus!',
+                'error'
+            )
+            this.$Progress.fail();
           });
         }
-      });
+      })
     },
     viewKategori(id){
       axios.get(URL+ '/api/admin/kategori/view/'+id, {headers: authHeader()}).then(function(response){

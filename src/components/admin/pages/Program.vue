@@ -133,7 +133,7 @@ import moment from 'moment'
 import { required } from 'vuelidate/lib/validators'
 import authHeader from '../../../services/auth-header-admin.service'
 
-const URL = 'http://localhost:4000'
+const URL = 'https://wakaf.praditya.web.id'
 export default {
   title: 'Program Wakaf',
   created() {
@@ -146,7 +146,7 @@ export default {
   data() {
 
     return {
-      imagePreview: '../../../assets/images/image_placeholder.png',
+      imagePreview: 'https://www.pikpng.com/pngl/b/74-745720_download-img-icon-png-clipart.png',
       program: {
         judul: '',
         gambar: '',
@@ -197,9 +197,9 @@ export default {
   },
   methods: {
     isDisabled (data){
-      if(data.wakafabadi.length==0 && data.wakafberjangka.length==0){
+      if(data.wakaf_abadi_terkumpul==0 && data.wakaf_berjangka_terkumpul){
         return false;
-      } else if(data.wakafabadi.length>0 || data.wakafberjangka.length>0){
+      } else if(data.wakaf_berjangka_terkumpul>0 || data.wakaf_berjangka_terkumpul>0){
         return true;
       }
     },
@@ -209,7 +209,7 @@ export default {
     },
     newModal() {
       this.submitted = false
-      this.imagePreview = 'http://localhost:4000/images/image_placeholder.png'
+      this.imagePreview = 'https://www.pikpng.com/pngl/b/74-745720_download-img-icon-png-clipart.png'
       this.program = {}
       this.editMode = false
       $('#addNew')
@@ -217,7 +217,7 @@ export default {
     },
     editModal(program){
       this.submitted = false
-      this.imagePreview = 'http://localhost:4000/images/'+program.gambar;
+      this.imagePreview = URL + '/images/'+program.gambar;
       this.program = program;
       this.editMode = true
       $('#addNew')
@@ -350,7 +350,14 @@ export default {
                         'Data Program sudah dihapus',
                         'success'
                     )
-                  })
+                  }).catch(err => {
+                swal.fire(
+                    'Gagal!',
+                    'Program Wakaf tidak bisa dihapus!',
+                    'error'
+                )
+                this.$Progress.fail();
+              })
             }
           })
     },

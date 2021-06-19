@@ -139,7 +139,7 @@
 import axios from 'axios'
 import moment from 'moment'
 
-const URL = 'http://localhost:4000'
+const URL = 'https://wakaf.praditya.web.id'
 
 // import Chart from 'chart.js';
 // import numeral from 'numeral';
@@ -235,7 +235,6 @@ export default {
   },
   methods: {
     checkDate(){
-      console.log('taaraaa');
       if(this.startdate != 'none'){
         var startdate = new Date(this.startdate);
         var enddate = new Date(this.enddate);
@@ -278,7 +277,7 @@ export default {
           .format('MMMM')
     },
     getAllPrograms() {
-      axios.get(URL + '/api/admin/program-wakaf/all', { headers: authHeader() })
+      axios.get('https://wakaf.praditya.web.id' + '/api/admin/program-wakaf/all', { headers: authHeader() })
           .then(function (response) {
             this.programs = response.data.data
           }.bind(this))
@@ -296,7 +295,7 @@ export default {
           }.bind(this))
     },
     getAllUsers() {
-      axios.get(URL + '/api/user/all/', { headers: authHeader() })
+      axios.get(URL + '/api/admin/users/all/', { headers: authHeader() })
           .then(function (response) {
             this.users = response.data
           }.bind(this))

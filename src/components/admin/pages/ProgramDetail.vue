@@ -15,22 +15,22 @@
               <i class="fas fa-atlas" v-show="currentProgram.kategori_id == 5"></i>
               {{ currentProgram.kategori.nama }}
             </span>
-<!--              <span v-if="formatDate(currentProgram.createdAt)<=formatDate(currentProgram.deadline)" class="badge badge-pill badge-primary">Ongoing</span>-->
-<!--              <span v-if="formatDate(currentProgram.createdAt)>formatDate(currentProgram.deadline)" class="badge badge-pill badge-success">Selesai</span>-->
+              <!--              <span v-if="formatDate(currentProgram.createdAt)<=formatDate(currentProgram.deadline)" class="badge badge-pill badge-primary">Ongoing</span>-->
+              <!--              <span v-if="formatDate(currentProgram.createdAt)>formatDate(currentProgram.deadline)" class="badge badge-pill badge-success">Selesai</span>-->
             </div>
             <h2>{{ currentProgram.judul }}</h2>
-<!--            <div style="max-width: 1000px">-->
-<!--              <div class="progress" style="height:20px;">-->
-<!--                <div class="progress-bar" role="progressbar"-->
-<!--                     :style="progressStyle(currentProgram.terkumpul,currentProgram.target)">-->
-<!--                  {{ currentProgram.terkumpul | filterMoney}}-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <h6 class="float-right">Dari <b>{{ currentProgram.target | filterMoney }}</b></h6>-->
-<!--            </div>-->
-<!--            <p class="text-left mt-3"><span class="mr-2"><i class="fa fa-calendar"></i></span>{{formatDate(currentProgram.createdAt)}} - {{formatDate(currentProgram.deadline)}}</p>-->
-<!--            <p class="text-left"><span class="mr-2"><i class="fa fa-sitemap"></i></span>{{ currentProgram.alamat}}</p>-->
-<!--            <p><a class="btn btn-primary mt-2" href="#" role="button">Edit <i class="fa fa-edit"></i></a></p>-->
+            <!--            <div style="max-width: 1000px">-->
+            <!--              <div class="progress" style="height:20px;">-->
+            <!--                <div class="progress-bar" role="progressbar"-->
+            <!--                     :style="progressStyle(currentProgram.terkumpul,currentProgram.target)">-->
+            <!--                  {{ currentProgram.terkumpul | filterMoney}}-->
+            <!--                </div>-->
+            <!--              </div>-->
+            <!--              <h6 class="float-right">Dari <b>{{ currentProgram.target | filterMoney }}</b></h6>-->
+            <!--            </div>-->
+            <!--            <p class="text-left mt-3"><span class="mr-2"><i class="fa fa-calendar"></i></span>{{formatDate(currentProgram.createdAt)}} - {{formatDate(currentProgram.deadline)}}</p>-->
+            <!--            <p class="text-left"><span class="mr-2"><i class="fa fa-sitemap"></i></span>{{ currentProgram.alamat}}</p>-->
+            <!--            <p><a class="btn btn-primary mt-2" href="#" role="button">Edit <i class="fa fa-edit"></i></a></p>-->
             <p><a class="btn btn-primary mt-1" href="#" role="button" @click.prevent="addNewLaporan">Buat Laporan <i class="fa fa-paperclip"></i></a></p>
           </div>
         </div>
@@ -111,29 +111,29 @@
                                 <div class="col-md-12">
                                   <!-- The time line -->
                                   <div class="timeline" v-for="laporan in laporannew" v-bind:key="laporan.id">
-                                      <!-- timeline time label -->
-                                      <div class="time-label">
-                                        <span class="bg-red">{{formatDate(laporan.createdAt)}}</span>
-                                      </div>
-                                      <!-- /.timeline-label -->
-                                      <!-- timeline item -->
-                                      <div>
-                                        <div class="timeline-item">
-                                          <div class="timeline-body">
-                                            <div class="container">
-                                              <div class="row">
-                                                <div class="col-4">
-                                                  <img class="img-thumbnail" :src="'http://localhost:4000/images/'+laporan.gambar"
-                                                       alt="Card image cap">
-                                                </div>
-                                                <div class="col-8">
-                                                  {{laporan.deskripsi}}
-                                                </div>
+                                    <!-- timeline time label -->
+                                    <div class="time-label">
+                                      <span class="bg-red">{{formatDate(laporan.createdAt)}}</span>
+                                    </div>
+                                    <!-- /.timeline-label -->
+                                    <!-- timeline item -->
+                                    <div>
+                                      <div class="timeline-item">
+                                        <div class="timeline-body">
+                                          <div class="container">
+                                            <div class="row">
+                                              <div class="col-4">
+                                                <img class="img-thumbnail" :src="'https://wakaf.praditya.web.id/images/'+laporan.gambar"
+                                                     alt="Card image cap">
+                                              </div>
+                                              <div class="col-8">
+                                                {{laporan.deskripsi}}
                                               </div>
                                             </div>
                                           </div>
                                         </div>
                                       </div>
+                                    </div>
                                   </div>
                                 </div>
                                 <!-- /.col -->
@@ -181,9 +181,9 @@
             <div class="modal-body">
               <div class="form-group">
                 <label for="deskripsi">Deskripsi</label>
-                <textarea name="deskripsi" v-model="laporan.deskripsi" id="deskripsi" class="form-control" placeholder="Masukkan Deskripsi Laporan Program Wakaf Uang" :class="{ 'is-invalid': submitted && $v.program.judul.$error }"></textarea>
-                  <div v-if="submitted && $v.program.judul.$error" class="invalid-feedback">
-                  <span v-if="!$v.program.judul.required">Judul Program is required</span>
+                <textarea name="deskripsi" v-model="laporan.deskripsi" id="deskripsi" class="form-control" placeholder="Masukkan Deskripsi Laporan Program Wakaf Uang" :class="{ 'is-invalid': submitted && $v.laporan.deskripsi.$error }"></textarea>
+                <div v-if="submitted && $v.program.judul.$error" class="invalid-feedback">
+                  <span v-if="!$v.laporan.deskripsi.required">Deskripsi laporan is required</span>
                 </div>
               </div>
 
@@ -218,12 +218,16 @@ import $ from 'jquery'
 import moment from 'moment'
 import swal from 'sweetalert2'
 import { required } from 'vuelidate/lib/validators'
-const URL = 'http://localhost:4000'
+const URL = 'https://wakaf.praditya.web.id'
 export default {
   title: 'Detail Program Wakaf',
   created() {
-    console.log(this.currentProgram);
     this.getLaporan();
+    this.getDataWakafAbadi();
+    this.getDataWakafBerjangka();
+    this.$on('AfterCreated', () => {
+      this.getLaporan()
+    })
   },
   data() {
     return {
@@ -250,8 +254,9 @@ export default {
         gambar: '',
         ProgramId: '',
       },
+      allWakafAbadi : [],
+      allWakafBerjangka : [],
       laporannew : [],
-
     }
   },
   computed : {
@@ -259,26 +264,11 @@ export default {
       return this.$store.state.currentProgramAdmin.program;
     },
     bgStyle(){
-      let bgImg = 'http://localhost:4000/images/'+this.currentProgram.gambar;
+      let bgImg = URL + '/images/'+this.currentProgram.gambar;
       return {
         "background": 'linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url('+bgImg+')'
       }
     },
-    allWakafAbadi(){
-      let all = [];
-      this.currentProgram.wakafabadi.forEach(abadi=> {
-        all.push(abadi)
-      })
-
-      return all;
-    },
-    allWakafBerjangka(){
-      let all = [];
-      this.currentProgram.wakafberjangka.forEach(berjangka=> {
-        all.push(berjangka)
-      })
-      return all;
-    }
   },
   validations: {
     laporan: {
@@ -291,13 +281,27 @@ export default {
       $("#laporan").modal('show');
     },
     getLaporan(){
-      axios.get(URL + '/api/laporan/view/byprogram/' + this.currentProgram.id).then(function (response) {
-        this.laporannew = response.data;
+      axios.get(URL + '/api/laporan/view/byprogram/' + this.currentProgram.id, { headers: authHeader() }).then(function (response) {
+        this.laporannew = response.data.data;
       }.bind(this));
-      console.log(this.laporannew)
+
     },
     formatDate(dm) {
       return moment(dm).format('DD/MM/YYYY');
+    },
+    getDataWakafAbadi(){
+      axios.get(URL + '/api/admin/wakaf-abadi/all', { headers: authHeader() }).then(function (response) {
+        this.allWakafAbadi = response.data.filter(wakaf => {
+          return wakaf.program_wakaf_id == this.currentProgram.id && wakaf.status_pembayaran == 'success';
+        })
+      }.bind(this));
+    },
+    getDataWakafBerjangka(){
+      axios.get(URL + '/api/admin/wakaf-berjangka/all', { headers: authHeader() }).then(function (response) {
+        this.allWakafBerjangka = response.data.filter(wakaf => {
+          return wakaf.program_wakaf_id == this.currentProgram.id && wakaf.status_pembayaran == 'success';
+        })
+      }.bind(this));
     },
     progressStyle(terkumpul, total) {
       return {
@@ -307,7 +311,7 @@ export default {
     },
     addNewLaporan(){
       this.submitted = false;
-      this.imagePreview = '../../../assets/images/image_placeholder.png';
+      this.imagePreview = 'https://www.pikpng.com/pngl/b/74-745720_download-img-icon-png-clipart.png';
       this.laporan = {};
       $("#addNewLaporan").modal('show');
     },
@@ -326,8 +330,6 @@ export default {
 
       if (this.laporan.gambar) {
         if (/\.(jpe?g|jpg|png|gif)$/i.test(this.laporan.gambar.name)) {
-
-          console.log("here");
           reader.readAsDataURL(this.laporan.gambar);
         }
       }
@@ -339,11 +341,10 @@ export default {
       this.laporan.ProgramId=this.currentProgram.id;
       formData.append('deskripsi', this.laporan.deskripsi);
       formData.append('file', this.laporan.gambar);
-      formData.append('ProgramId', this.laporan.ProgramId);
+      formData.append('program_wakaf_id', this.laporan.ProgramId);
       if (!this.$v.$invalid) {
         this.$Progress.start();
         axios.post(URL + '/api/laporan/', formData, {headers: authHeader()}).then((res) => {
-              console.log(res)
               this.$emit('AfterCreated');
               $("#addNewLaporan").modal('hide');
               swal.fire(

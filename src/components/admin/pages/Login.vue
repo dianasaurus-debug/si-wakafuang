@@ -36,10 +36,10 @@
           <div class="row">
             <div class="col-8">
               <div class="icheck-primary">
-<!--                <input type="checkbox" id="remember">-->
-<!--                <label for="remember">-->
-<!--                  Remember Me-->
-<!--                </label>-->
+                <!--                <input type="checkbox" id="remember">-->
+                <!--                <label for="remember">-->
+                <!--                  Remember Me-->
+                <!--                </label>-->
               </div>
             </div>
             <!-- /.col -->
@@ -64,28 +64,28 @@ import swal from "sweetalert2";
 
 export default {
   title: 'Login',
-    data() {
-      return {
-        user: {
-          email: "",
-          password: "",
-        },
-        loading : false,
-        message : '',
-        submitted : false,
-      };
-    },
-    mounted () {
-      document.body.classList.add('login-page')
-    },
-    destroyed () {
-      document.body.classList.remove('login-page')
-    },
-    computed: {
-      loggedIn() {
-        return this.$store.state.auth_admin.status.loggedIn;
-      }
-    },
+  data() {
+    return {
+      user: {
+        email: "",
+        password: "",
+      },
+      loading : false,
+      message : '',
+      submitted : false,
+    };
+  },
+  mounted () {
+    document.body.classList.add('login-page')
+  },
+  destroyed () {
+    document.body.classList.remove('login-page')
+  },
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth_admin.status.loggedIn;
+    }
+  },
   validations: {
     user: {
       email: {required, email},
