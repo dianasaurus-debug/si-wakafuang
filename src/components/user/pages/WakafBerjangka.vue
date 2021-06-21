@@ -125,11 +125,11 @@
                 <th scope="row">Program Wakaf</th>
                 <td>{{wakaf.program.judul}}</td>
               </tr>
-              <tr>
-                <th scope="row">Cetak</th>
+              <tr v-if="wakaf.nama_file_akta!=null&&wakaf.nama_file_sertifikat!=null">
+                <th scope="row">Download</th>
                 <td>
-                  <button type="button" class="btn btn-primary mr-2">Sertifikat Wakaf</button>
-                  <button type="button" class="btn btn-primary">Akta Ikrar Wakaf</button>
+                  <button @click="downloadDokumen(wakaf.nama_file_sertifikat, 'sertifikat')" type="button" class="btn btn-primary mr-2">Sertifikat Wakaf</button>
+                  <button @click="downloadDokumen( wakaf.nama_file_akta, 'akta')" type="button" class="btn btn-primary">Akta Ikrar Wakaf</button>
                 </td>
               </tr>
               </tbody>
@@ -190,6 +190,9 @@ export default {
     },
   },
   methods: {
+    downloadDokumen(filename, fileType) {
+      saveAs(`${URL}/dokumen/${fileType}/${filename}`, filename)
+    },
     moment: function (value) {
       return moment(value);
     },
