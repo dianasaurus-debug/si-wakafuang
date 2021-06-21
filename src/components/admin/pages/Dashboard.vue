@@ -259,13 +259,13 @@ export default {
       this.getGrafikDataBerjangka();
     },
     getGrafikData() {
-      axios.get(URL + `/api/admin/wakaf-abadi/grafik/startdate/${this.startdate}/enddate/${this.enddate}`, { headers: authHeader() })
+      axios.get('http://localhost:4000' + `/api/admin/wakaf-abadi/grafik/startdate/${this.startdate}/enddate/${this.enddate}`, { headers: authHeader() })
           .then(data => {
             this.grafikResult = data.data
           })
     },
     getGrafikDataBerjangka() {
-      axios.get(URL + `/api/admin/wakaf-berjangka/grafik/startdate/${this.startdate}/enddate/${this.enddate}`, { headers: authHeader() })
+      axios.get('http://localhost:4000' + `/api/admin/wakaf-berjangka/grafik/startdate/${this.startdate}/enddate/${this.enddate}`, { headers: authHeader() })
           .then(data => {
             this.grafikResultBerjangka = data.data
             console.log(data.data)
