@@ -634,8 +634,8 @@ export default {
     },
     getLaporan(){
       axios.get(URL + '/api/laporan/' + this.currentProgram.id, {headers: authHeader()}).then(function (response) {
-        this.laporannew = response.data;
-        console.log(this.currentProgram.id);
+        this.laporannew = response.data.data;
+        console.log(this.laporannew);
       }.bind(this));
     },
     formatDate(dm) {
